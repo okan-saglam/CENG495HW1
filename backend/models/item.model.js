@@ -20,7 +20,8 @@ const ItemSchema = new mongoose.Schema({
         default: 0
     },
     reviews: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
     }]
 }, { discriminatorKey: 'category', timestamps: true });
 

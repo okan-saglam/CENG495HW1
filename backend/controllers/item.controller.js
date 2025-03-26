@@ -31,22 +31,62 @@ const addItem = async (req, res) => {
     }
 };
 
-// Remove Item
+// Remove Item with review cleanup
 const removeItem = async (req, res) => {
-    try{
+    try {
         const { id } = req.params;
         
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Geçersiz ID formatı" });
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+        
+        const item = await Item.findById(id);
+        
+        if (!item) {
+            return res.status(404).json({ message: "Item with this ID not found" });
+        }
+        
+        const Review = mongoose.model('Review');
+        const itemReviews = await Review.find({ item: id });
+        
+        // Process each review
+        for (const review of itemReviews) {
+            
+            const user = await mongoose.model('User').findById(review.user);
+            
+            if (user) {
+                // Remove this review from the user's reviews array
+                user.reviews = user.reviews.filter(
+                    reviewId => reviewId.toString() !== review._id.toString()
+                );
+                
+                // Delete the review
+                await Review.findByIdAndDelete(review._id);
+                
+                // Recalculate user's average rating based on their remaining reviews
+                const userRemainingReviews = await Review.find({ user: user._id });
+                
+                if (userRemainingReviews.length > 0) {
+                    const totalRating = userRemainingReviews.reduce(
+                        (sum, review) => sum + review.rating, 0
+                    );
+                    user.averageRating = totalRating / userRemainingReviews.length;
+                } else {
+                    // No reviews left, reset to default
+                    user.averageRating = 0;
+                }
+                
+                await user.save();
+            }
         }
         
         const deletedItem = await Item.findByIdAndDelete(id);
         
-        if (!deletedItem) {
-            return res.status(404).json({ message: "Bu ID'ye sahip öğe bulunamadı" });
-        }
-        
-        res.status(200).json({ message: "Öğe başarıyla silindi", item: deletedItem });
+        res.status(200).json({ 
+            message: "Item and related reviews successfully deleted", 
+            item: deletedItem,
+            reviewsRemoved: itemReviews.length
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -83,4 +123,33 @@ const getItemById = async (req, res) => {
     }
 };
 
-module.exports = { addItem, removeItem, getAllItems, getItemById };
+// Get Items By Category
+const getItemsByCategory = async (req, res) => {
+    try {
+        const { category } = req.params;
+        
+        const validCategories = ['GPS Sport Watch', 'Antique Furniture', 'Running Shoes', 'Vinyls'];
+        
+        if (!validCategories.includes(category) && category !== 'all') {
+            return res.status(400).json({ message: "Geçersiz kategori" });
+        }
+        
+        if (category === 'all') {
+            const items = await Item.find();
+            return res.status(200).json(items);
+        }
+        
+        const items = await Item.find({ category: category });
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { 
+    addItem, 
+    removeItem, 
+    getAllItems, 
+    getItemById,
+    getItemsByCategory
+};

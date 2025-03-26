@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const ItemRoute = require('./routes/item.route');
+const UserRoute = require('./routes/user.route');
+const ReviewRoute = require('./routes/review.route');
 
 const app = express();
 
@@ -9,8 +11,21 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: false})); // form tipinde request atmak için middleware
 
+// CORS middleware for frontend access
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        return res.status(200).json({});
+    }
+    next();
+});
+
 // Routes
 app.use('/items', ItemRoute);
+app.use('/users', UserRoute);
+app.use('/reviews', ReviewRoute);
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)

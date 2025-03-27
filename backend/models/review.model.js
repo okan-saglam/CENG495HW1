@@ -17,7 +17,15 @@ const ReviewSchema = new mongoose.Schema({
         max: 10,
         required: true
     },
-    comment: String
+    comment: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Review = mongoose.model('Review', ReviewSchema);

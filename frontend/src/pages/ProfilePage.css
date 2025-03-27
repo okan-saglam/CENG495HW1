@@ -1,0 +1,136 @@
+.profile-page {
+  min-height: calc(100vh - 140px);
+  padding: 40px 0;
+  background-color: var(--background-color);
+}
+
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.profile-header {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-user-info h1 {
+  margin: 0 0 10px 0;
+  font-size: 28px;
+  color: var(--text-color);
+}
+
+.user-role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.user-role-badge:nth-of-type(1) {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.user-role-badge:nth-of-type(2) {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+.profile-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Update just the tab button section */
+.tab-button {
+  background: #f8f9fa; /* Light background instead of none */
+  border: 1px solid #dee2e6;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #495057; /* Darkened for better contrast */
+}
+
+.tab-button:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  color: #212529;
+}
+
+.tab-button.active {
+  background-color: var(--primary-color);
+  color: black;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button:focus {
+  outline: 3px solid rgba(74, 109, 229, 0.3);
+}
+
+.profile-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: var(--box-shadow);
+  min-height: 400px;
+}
+
+.not-logged-in {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+.not-logged-in h2 {
+  margin-bottom: 20px;
+  color: var(--dark-gray);
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .profile-tabs {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .profile-content {
+    padding: 20px;
+  }
+}

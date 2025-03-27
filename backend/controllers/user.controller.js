@@ -67,7 +67,8 @@ const login = async (req, res) => {
         const token = jwt.sign({ 
             username: user.username, 
             id: user._id,
-            role: user.role
+            role: user.role,
+            averageRating: user.averageRating
         }, process.env.JWT_SECRET, 
         { expiresIn: '1h' });
         res.json({ token });
@@ -81,6 +82,23 @@ const getAllUsers = async (req, res) => {
     try{
         const users = await User.find();
         res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Get current user
+const getCurrentUser = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        
+        const user = await User.findById(userId).select('-password');
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -162,5 +180,6 @@ module.exports = {
     login,
     getAllUsers,
     removeUser,
-    createUser
+    createUser,
+    getCurrentUser
 };

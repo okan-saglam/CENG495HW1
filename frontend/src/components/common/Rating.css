@@ -1,0 +1,25 @@
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  display: inline-flex;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.star-empty {
+  color: var(--light-gray);
+}
+
+.rating-value {
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--dark-gray);
+}

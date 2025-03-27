@@ -1,0 +1,78 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #213547;
+  background-color: #ffffff;
+}
+
+h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f0f0f0; /* Changed from #f9f9f9 to create more contrast */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  border-color: #646cff;
+  background-color: #e8e8e8; /* Added to ensure visibility on hover */
+  transform: translateY(-1px);
+}
+
+button:active {
+  background-color: #4a6de5; /* Ensures visibility when clicked */
+  color: white;
+  transform: translateY(1px);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 3px solid rgba(100, 108, 255, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+  }
+  button {
+    background-color: #2a2a2a; /* Darker button for dark mode */
+  }
+  button:hover {
+    background-color: #3a3a3a;
+  }
+  button:active {
+    background-color: #4a6de5;
+    color: white;
+  }
+}

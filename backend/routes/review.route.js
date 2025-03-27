@@ -8,6 +8,7 @@ router.get('/item/:itemId', ReviewControllers.getReviewsByItem);
 
 // Protected routes - only authenticated users can access
 router.post('/', authMiddleware, ReviewControllers.addOrUpdateReview);
+router.get('/user', authMiddleware, ReviewControllers.getUserReviews);
 router.get('/user/item/:itemId', authMiddleware, ReviewControllers.getUserReviewForItem);
 
 module.exports = router;

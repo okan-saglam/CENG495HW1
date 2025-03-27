@@ -13,9 +13,9 @@ const addOrUpdateReview = async (req, res) => {
             return res.status(400).json({ message: "Invalid Item ID" });
         }
 
-        // Find the item and user
+        // Find the item and user - SELECT REVIEWS FIELD TOO
         const item = await Item.findById(itemId);
-        const user = await User.findById(userId);
+        const user = await User.findById(userId); // Tüm user alanlarını getir
         
         if (!item) {
             return res.status(404).json({ message: "Item does not exist" });
@@ -25,6 +25,11 @@ const addOrUpdateReview = async (req, res) => {
             return res.status(404).json({ message: "User does not exist" });
         }
 
+        // reviews alanının varlığını kontrol et
+        if (!user.reviews) {
+            user.reviews = []; // Eğer yoksa boş dizi oluştur
+        }
+        
         let existingReview = await Review.findOne({ user: userId, item: itemId });
         let isUpdate = false;
         
@@ -32,7 +37,7 @@ const addOrUpdateReview = async (req, res) => {
             // Update existing review
             existingReview.rating = rating;
             existingReview.comment = comment;
-            existingReview.updatedAt = Date.now();
+            existingReview.updatedAt = new Date(); // Ensure date is set properly
             
             await existingReview.save();
             isUpdate = true;
@@ -42,15 +47,19 @@ const addOrUpdateReview = async (req, res) => {
                 user: userId,
                 item: itemId,
                 rating,
-                comment
+                comment,
+                createdAt: new Date() // Ensure date is set properly
             });
 
             await newReview.save();
             
             // Add review to item's reviews array
+            if (!item.reviews) item.reviews = [];
             item.reviews.push(newReview._id);
+            await item.save();
             
-            // Add review to user's reviews array
+            // Add review to user's reviews array - KONTROL EKLE
+            if (!user.reviews) user.reviews = [];
             user.reviews.push(newReview._id);
             await user.save();
             
@@ -73,11 +82,23 @@ const addOrUpdateReview = async (req, res) => {
             await user.save();
         }
 
+        // Populate the user field to return complete user info
+        await existingReview.populate('user', 'username');
+        
         const message = isUpdate 
             ? "Review updated successfully" 
             : "Review added successfully";
             
-        res.status(201).json({ message, review: existingReview });
+        res.status(201).json({ 
+            message, 
+            review: {
+                ...existingReview._doc,
+                user: {
+                    _id: user._id,
+                    username: user.username
+                }
+            }
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

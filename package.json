@@ -1,0 +1,12 @@
+{
+  "name": "ceng495hw1",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  }
+}

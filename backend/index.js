@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/api', require('./routes'))
 app.use('/items', ItemRoute);
 app.use('/users', UserRoute);
 app.use('/reviews', ReviewRoute);

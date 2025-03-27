@@ -23,10 +23,14 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api', require('./routes'))
-app.use('/items', ItemRoute);
-app.use('/users', UserRoute);
-app.use('/reviews', ReviewRoute);
+app.get('/api', (req, res) => {
+    res.status(200).json({ message: 'API is running correctly' });
+});
+
+// Tüm API rotalarını /api prefix'i altında grupla
+app.use('/api/items', ItemRoute);
+app.use('/api/users', UserRoute);
+app.use('/api/reviews', ReviewRoute);
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)

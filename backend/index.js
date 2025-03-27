@@ -17,8 +17,7 @@ app.use((req, res, next) => {
     const allowedOrigins = [
         'http://localhost:5173',
         'http://localhost:3000',
-        'https://e-commerce-ruby-kappa-47.vercel.app',
-        'https://your-frontend-domain.vercel.app' // Frontend domaininizi ekleyin
+        'https://e-commerce-ruby-kappa-47.vercel.app'
     ];
     
     const origin = req.headers.origin;

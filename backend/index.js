@@ -13,12 +13,30 @@ app.use(express.urlencoded({extended: false})); // form tipinde request atmak i�
 
 // CORS middleware for frontend access
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    // Tüm kaynaklardan gelen isteklere izin verin (geliştirme ve üretim için)
+    const allowedOrigins = [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'https://e-commerce-ruby-kappa-47.vercel.app',
+        'https://your-frontend-domain.vercel.app' // Frontend domaininizi ekleyin
+    ];
+    
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+    
+    // İzin verilen başlıklar ve methodlar
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
     if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
         return res.status(200).json({});
     }
+    
     next();
 });
 

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://e-commerce-ruby-kappa-47.vercel.app/api';
 
 console.log('API URL:', API_URL);
 
@@ -20,6 +19,8 @@ api.interceptors.request.use(config => {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
   return config;
+}, error => {
+  return Promise.reject(error);
 });
 
 // Add response interceptor for error handling

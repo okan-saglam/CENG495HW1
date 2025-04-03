@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://e-commerce-ruby-kappa-47.vercel.app/api';
+const API_URL = import.meta.env.VITE_API_URL || 
+  (window.location.hostname === 'localhost' ? 
+    'http://localhost:3000/api' : 
+    'https://e-commerce-ruby-kappa-47.vercel.app/api');
 
 console.log('API URL:', API_URL);
 

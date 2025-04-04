@@ -18,10 +18,16 @@ const Login = () => {
 
     try {
       await login(username, password);
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+      }, 100); // Küçük bir gecikme ekleyerek olası yarış koşullarını önleme
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
-    } finally {
+      console.error('Login component caught error:', err);
+      
+      // Basitleştirilmiş ve güvenli hata mesajı gösterimi
+      setError(err.message || 'Login failed. Please try again.');
+      
+      // Tüm bileşen durumunu temizle
       setIsLoading(false);
     }
   };

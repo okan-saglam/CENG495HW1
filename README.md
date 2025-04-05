@@ -6,7 +6,7 @@ A modern e-commerce marketplace where users can buy and sell products, leave rev
 
 ## Live Demo
 
-👉 [Visit Live Site](https://e-commerce-okan-saglams-projects.vercel.app/)
+[Visit Live Site](https://e-commerce-okan-saglams-projects.vercel.app/)
 
 ---
 

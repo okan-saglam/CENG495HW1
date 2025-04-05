@@ -1,16 +1,16 @@
-# 🛒 E-Commerce Platform
+# E-Commerce Platform
 
 A modern e-commerce marketplace where users can buy and sell products, leave reviews, and build reputation through ratings.
 
 ---
 
-## 🔗 Live Demo
+## Live Demo
 
 👉 [Visit Live Site](https://e-commerce-okan-saglams-projects.vercel.app/)
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React (with Vite)**: Fast and modular UI development
@@ -28,7 +28,7 @@ A modern e-commerce marketplace where users can buy and sell products, leave rev
 
 ---
 
-## 🏗️ Architecture & Design
+## Architecture & Design
 
 - **Separation of Concerns**: Frontend and backend are developed and maintained independently  
 - **MongoDB Schema Design**:
@@ -41,16 +41,16 @@ A modern e-commerce marketplace where users can buy and sell products, leave rev
 
 ---
 
-## 📋 Features
+## Features
 
-### 👤 User Features
+### User Features
 - Authentication: Register, login, view profile, logout  
 - Browse Products: Filter by categories  
 - Product Detail Pages: View detailed descriptions and category-specific specs  
 - Reviews & Ratings: Add, edit, and read product reviews  
 - User Profiles: View other users' ratings and items for sale  
 
-### 🛠️ Admin Features
+### Admin Features
 - Admin Dashboard: Accessible after login with admin credentials  
 - Add Products: Enter item-specific details based on category  
 - Remove Items: Admin-only functionality for content moderation  
@@ -58,7 +58,7 @@ A modern e-commerce marketplace where users can buy and sell products, leave rev
 
 ---
 
-## 📝 Why These Technology Choices?
+## Why These Technology Choices?
 
 ### JavaScript Ecosystem
 Chose JavaScript for both frontend and backend to maintain a consistent language across the entire stack:
@@ -93,25 +93,25 @@ MongoDB was chosen because:
 
 ---
 
-## 👨‍💻 User Guide
+## User Guide
 
-### 🔐 Login Information
+### Login Information
 
 You can access the application in two ways:
 
 #### Regular User Access
-- **Username**: `user`  
-- **Password**: `user123`  
+- **Username**: `testuser1`  
+- **Password**: `123456`  
 - **Capabilities**: Browse products, leave reviews, view profile  
 
 #### Admin Access
-- **Username**: `admin`  
-- **Password**: `admin123`  
+- **Username**: `testadmin`  
+- **Password**: `test1234`  
 - **Capabilities**: All regular user features plus access to admin panel for managing products and users  
 
 ---
 
-## 🧭 Basic Navigation
+## Basic Navigation
 
 - **Home Page**: Browse all products or filter by category  
 - **Product Details**: Click on any product to view full details and reviews  
@@ -120,7 +120,7 @@ You can access the application in two ways:
 
 ---
 
-## 👥 For Regular Users
+## For Regular Users
 
 1. Register an account or log in with existing credentials  
 2. Browse products by categories on the homepage  
@@ -130,7 +130,7 @@ You can access the application in two ways:
 
 ---
 
-## 🧑‍💼 For Administrators
+## For Administrators
 
 1. Log in with admin credentials  
 2. Access the admin panel via the navigation bar  

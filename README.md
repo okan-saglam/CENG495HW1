@@ -93,24 +93,6 @@ MongoDB was chosen because:
 
 ---
 
-## User Guide
-
-### Login Information
-
-You can access the application in two ways:
-
-#### Regular User Access
-- **Username**: `testuser1`  
-- **Password**: `123456`  
-- **Capabilities**: Browse products, leave reviews, view profile  
-
-#### Admin Access
-- **Username**: `testadmin`  
-- **Password**: `test1234`  
-- **Capabilities**: All regular user features plus access to admin panel for managing products and users  
-
----
-
 ## Basic Navigation
 
 - **Home Page**: Browse all products or filter by category  
